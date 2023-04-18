@@ -7,13 +7,16 @@ import {
     SettingsOutlined, 
     ArrowDropDownCircleOutlined 
 } from '@mui/icons-material';
-import FlexBetween from './FlexBetween';
+import FlexBetween from 'components/FlexBetween';
 import { useDispatch } from 'react-redux';
 import { setMode } from 'state';
 import profileImage from "assets/profile.jpeg";
 import { AppBar, IconButton, InputBase, Toolbar, useTheme } from '@mui/material';
 
-const NavBar = () => {
+const NavBar = ({
+  isSidebarOpen,
+  setIsSidebarOpen,
+}) => {
   const dispatch = useDispatch();
   const theme = useTheme();
   return (
@@ -27,7 +30,7 @@ const NavBar = () => {
       <Toolbar sx={{ justifyContent: "space-between" }}>
         {/* Left side */}
         <FlexBetween>
-          <IconButton onClick={() => console.log("open/close sidebar")}>
+          <IconButton onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
             <MenuIcon />
           </IconButton>
           <FlexBetween
