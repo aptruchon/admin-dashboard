@@ -12,7 +12,7 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
       max: 50,
-      unique: true
+      unique: true,
     },
     password: {
       type: String,
@@ -26,13 +26,13 @@ const UserSchema = new mongoose.Schema(
     phoneNumber: String,
     transactions: Array,
     role: {
-      type: String, 
+      type: String,
       enum: ["user", "admin", "superadmin"],
-      default: "admin"
+      default: "admin",
     },
   },
   { timestamps: true }
 );
 
-const User = mongoose.model("User", userShema);
+const User = mongoose.model("User", UserSchema);
 export default User;
