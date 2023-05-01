@@ -15,6 +15,7 @@ export const globalSlice = createSlice({
     }
 })
 
+// To have access elsewhere
 export const { setMode } = globalSlice.actions;
 
 export default globalSlice.reducer;
