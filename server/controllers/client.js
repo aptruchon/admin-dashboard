@@ -50,19 +50,19 @@ export const getTransactions = async (req, res) => {
     };
     const sortFormatted = Boolean(sort) ? generateSort() : {};
 
-    const transactions = await Transaction.find({
+    const queryFilter = {
       $or: [
         { cost: { $regex: new RegExp(search, "i") } },
         { userId: { $regex: new RegExp(search, "i") } },
-      ],
-    })
+      ]
+    };
+
+    const transactions = await Transaction.find(queryFilter)
       .sort(sortFormatted)
       .skip(page * pageSize)
       .limit(pageSize);
 
-    const total = await Transaction.countDocuments({
-      name: { $regex: search, $options: "i" },
-    })
+    const total = await Transaction.countDocuments(queryFilter);
 
     res.status(200).json({
       transactions,
