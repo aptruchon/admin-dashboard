@@ -1,9 +1,16 @@
-import React from 'react'
+import React from "react";
+import { Box, useTheme } from "@mui/material";
+import { useGetGeographyQuery } from "state/api";
+import Header from "components/Header";
+import { ResponsiveChoropleth } from "@nivo/geo";
+import { geoData } from "state/geoData";
 
-function Geography() {
-  return (
-    <div>Geography</div>
-  )
+const Geography = () => {
+  const theme = useTheme();
+  const { data } = useGetGeographyQuery();
+  console.log("🚀 ~ data:", data)
+
+  return <div>Geography</div>;
 }
 
-export default Geography
+export default Geography;
