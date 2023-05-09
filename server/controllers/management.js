@@ -25,7 +25,7 @@ export const getUserPerformance = async (req, res) => {
           as: "affiliateStats",
         },
       },
-      { $unwind: "affiliateStats" },
+      { $unwind: "$affiliateStats" },
     ]);
 
     const saleTransactions = await Promise.all(
@@ -33,14 +33,14 @@ export const getUserPerformance = async (req, res) => {
         return Transaction.findById(id);
       })
     );
-
     const filteredSaleTransactions = saleTransactions.filter(
       (transaction) => transaction !== null
     );
 
-    res
-      .status(200)
-      .json({ user: userWithStats[o], sales: filteredSaleTransactions });
+    res.status(200).json({
+      user: userWithStats[0],
+      sales: filteredSaleTransactions,
+    });
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
