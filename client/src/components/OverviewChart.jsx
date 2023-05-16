@@ -24,8 +24,8 @@ const OverviewChart = ({ isDashboard = false, view }) => {
 
     Object.values(monthlyData).reduce(
       (acc, { month, totalSales, totalUnits }) => {
-        const curSales = (acc.sales = totalSales);
-        const curUnits = (acc.units = totalUnits);
+        const curSales = acc.sales + totalSales;
+        const curUnits = acc.units + totalUnits;
 
         totalSalesLine.data = [
           ...totalSalesLine.data,
@@ -36,7 +36,7 @@ const OverviewChart = ({ isDashboard = false, view }) => {
           { x: month, y: curUnits },
         ];
 
-        return { sale: curSales, units: curUnits };
+        return { sales: curSales, units: curUnits };
       },
       { sales: 0, units: 0 }
     );
@@ -93,6 +93,7 @@ const OverviewChart = ({ isDashboard = false, view }) => {
       }}
       yFormat=" >-.2f"
       curve="catmullRom"
+      enableArea={isDashboard}
       axisTop={null}
       axisRight={null}
       axisBottom={{
@@ -100,6 +101,17 @@ const OverviewChart = ({ isDashboard = false, view }) => {
           if (isDashboard) return v.slice(0, 3);
           return v;
         },
+        orient: "bottom",
+        tickSize: 5,
+        tickPadding: 5,
+        tickRotation: 0,
+        legend: isDashboard ? "" : "Month",
+        legendOffset: 36,
+        legendPosition: "middle",
+      }}
+      axisLeft={{
+        orient: "left",
+        tickValues: 5,
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
@@ -107,14 +119,6 @@ const OverviewChart = ({ isDashboard = false, view }) => {
           ? ""
           : `Total ${view === "sales" ? "Revenue" : "Units"} for Year`,
         legendOffset: -60,
-        legendPosition: "middle",
-      }}
-      axisLeft={{
-        tickSize: 5,
-        tickPadding: 5,
-        tickRotation: 0,
-        legend: isDashboard ? "" : "Month",
-        legendOffset: -40,
         legendPosition: "middle",
       }}
       enableGridX={false}
