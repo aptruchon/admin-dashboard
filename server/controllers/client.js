@@ -37,10 +37,10 @@ export const getCustomers = async (req, res) => {
 
 export const getTransactions = async (req, res) => {
   try {
-    // sort should look like this: { "field": "userId", "sort": "desc" }
+    // sort should look like this: { "field": "userId", "sort": "desc"}
     const { page = 1, pageSize = 20, sort = null, search = "" } = req.query;
 
-    // formatted sort should look like { userID: -1 }
+    // formatted sort should look like { userId: -1 }
     const generateSort = () => {
       const sortParsed = JSON.parse(sort);
       const sortFormatted = {
@@ -51,19 +51,19 @@ export const getTransactions = async (req, res) => {
     };
     const sortFormatted = Boolean(sort) ? generateSort() : {};
 
-    const queryFilter = {
+    const transactions = await Transaction.find({
       $or: [
         { cost: { $regex: new RegExp(search, "i") } },
         { userId: { $regex: new RegExp(search, "i") } },
-      ]
-    };
-
-    const transactions = await Transaction.find(queryFilter)
+      ],
+    })
       .sort(sortFormatted)
       .skip(page * pageSize)
       .limit(pageSize);
 
-    const total = await Transaction.countDocuments(queryFilter);
+    const total = await Transaction.countDocuments({
+      userId: { $regex: search, $options: "i" },
+    });
 
     res.status(200).json({
       transactions,
