@@ -21,7 +21,8 @@ const Transactions = () => {
     sort: JSON.stringify(sort),
     search,
   });
-  
+  console.log("🚀 ~ data:", data)
+
   const columns = [
     {
       field: "_id",
@@ -43,15 +44,15 @@ const Transactions = () => {
       headerName: "# of Products",
       flex: 0.5,
       sortable: false,
-      renderCell: (params) => params.value.lenght
+      renderCell: (params) => params.value.length
     },
     {
       field: "cost",
       headerName: "Cost",
       flex: 1,
-      renderCell: (params) => `$${Number(params.value).toFixed(2)}`
+      renderCell: (params) => `$${Number(params.value).toFixed(2)}`,
     },
-  ]
+  ];
 
   return (
     <Box m="1.5rem 2.5rem">
