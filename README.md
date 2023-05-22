@@ -5,7 +5,7 @@ Description: Admin dashboard using mock data built using the MERN stack (MongoDB
 
 https://admin-frontend-1v2e.onrender.com
 
-***Build might be slow because I chose a free tier on render.com***
+***If the site has not been used in the last 15 minutes, it might take some time for the apis to load***
 
 **Interesting things I've learned**
 - Server side pagination
