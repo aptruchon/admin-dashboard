@@ -1,7 +1,8 @@
 # admin-dashboard
-Admin dashboard using mock data built using the MERN stack (MongoDB, Express, React, Node)
+Description: Admin dashboard using mock data built using the MERN stack (MongoDB, Express, React, Node)
 
 **👇 Experience it yourself 👇**
+
 https://admin-frontend-1v2e.onrender.com
 
 ***Build might be slow because I chose a free tier on render.com***
